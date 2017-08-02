@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProfile name="dev">
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%cyan(%date{HH:mm:ss.SSS}) %magenta() %highlight(%-5level) %blue([%file : %line])
+                    %boldGreen(%msg%n)
+                </pattern>
+            </encoder>
+        </appender>
+        <!-- hibernate 输出SQL -->
+        <logger name="org.hibernate.SQL" level="DEBUG"/>
+        <logger name="org.hibernate" level="INFO"/>
+        <logger name="cn.cherish.springcloud" level="DEBUG"/>
+
+        <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <destination>39.108.67.111:4567</destination>
+            <!-- encoder is required -->
+            <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" />
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="console"/>
+            <appender-ref ref="stash"/>
+        </root>
+    </springProfile>
+
+</configuration>

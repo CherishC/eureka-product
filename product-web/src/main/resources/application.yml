@@ -1,0 +1,43 @@
+server:
+  port: 8791
+  tomcat:
+    uri-encoding: UTF-8
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://119.23.30.142:8761/eureka/
+
+zookeeper:
+  connectString: 119.23.30.142:2181,39.108.67.111:2181,120.77.64.204:2181
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-product
+  #===== redis settings =====#
+  redis:
+    host: 119.23.30.142
+    port: 6379
+    pool:
+      max-active: 50
+  datasource:
+      url: jdbc:mysql://119.23.30.142:3306/springcloud_product?characterEncoding=utf8
+      username: root
+      password: caimengyuan
+  jpa:
+    database: MYSQL
+    show-sql: true
+  ## Hibernate ddl auto (validate|create|create-drop|update)
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  cache:
+    type: redis
+    cache-names: products
